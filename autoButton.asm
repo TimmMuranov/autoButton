@@ -16,6 +16,7 @@ uint8_t digitalRead(uint8_t pin){
     return !!(PINB & _BV(pin));
 }
 
+// Эту писал сам ;)
 uint8_t pinMode(uint8_t pin, char state) // i - INPUT, o - OUTPUT 
 {
    if(pin > 5 || pin < 0) return 1;
