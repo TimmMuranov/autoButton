@@ -28,15 +28,19 @@ uint8_t pinMode(uint8_t pin, char state) // i - INPUT, o - OUTPUT
 
 // ATMEL ATTINY13 - ARDUINO
 //
-//       +-\/-+
-// PB5  1|    |8  Vcc
-// PB3  2|    |7  PB2
-// PB4  3|    |6  PB1
-// GND  4|    |5  PB0 
-//       +----+
+//                  +-\/-+
+//            PB5  1|    |8  Vcc
+//    Выход 1 PB3  2|    |7  PB2 Выход 2
+//       Вход PB4  3|    |6  PB1 Светодиод
+//            GND  4|    |5  PB0 Кнопка
+//                  +----+
 
 int main(void)
 {
+    pinMode(3, "o");
+    pinMode(2, "o");
+    pinMode(1, "o");
+    
     while(1)
     {
        //основной цикл
