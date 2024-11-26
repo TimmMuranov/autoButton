@@ -1,5 +1,8 @@
+#define F_CPU 1200000UL
 #include <avr/io.h>
-// Вставка реализации базовых функций из Core13 (core13_022_arduino_1_6)
+#include <util/delay.h> // _delay_ms(время_в_мс) - команда задержки
+
+// Вставка реализации базовых функций (и ASCII арт) из Core13 (core13_022_arduino_1_6)
 void digitalWrite(uint8_t pin, uint8_t val){
     if(pin > 5 || pin < 0){return;}
     if(pin < 0){turnOffPWM(pin);}
@@ -29,11 +32,31 @@ uint8_t pinMode(uint8_t pin, char state) // i - INPUT, o - OUTPUT
 // ATMEL ATTINY13 - ARDUINO
 //
 //                  +-\/-+
-//            PB5  1|    |8  Vcc
+//      Ресет PB5  1|    |8  Vcc
 //    Выход 1 PB3  2|    |7  PB2 Выход 2
-//       Вход PB4  3|    |6  PB1 Светодиод
+//  Доп. вход PB4  3|    |6  PB1 Светодиод
 //            GND  4|    |5  PB0 Кнопка
 //                  +----+
+
+byte flag_work_mode = 0;
+/*
+0 - рабочий цикл
+1 - настройка 1 выхода, времени высокого уровня.
+2 - настройка 1 выхода, время задержки.
+3 - настройка 2 выхода, время высокого уровня
+4 - настройка 2 выхода, время задержки.
+5 - отладка или что-то другое
+*/
+
+unsigned long time_delay_1 = 1000;
+unsigned long time_work_1 = 1000; 
+unsigned long time_delay_2 = 1000;
+unsigned long time_work_2 = 1000; 
+
+void output_set()
+{
+    
+}
 
 int main(void)
 {
