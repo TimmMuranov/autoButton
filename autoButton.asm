@@ -16,6 +16,14 @@ uint8_t digitalRead(uint8_t pin){
     return !!(PINB & _BV(pin));
 }
 
+uint8_t pinMode(uint8_t pin, char state) // i - INPUT, o - OUTPUT 
+{
+   if(pin > 5 || pin < 0) return 1;
+   if(state == "i") DDRB &= ~(1 << PB(pin));
+   else if(state == "o") DDRB |= (1 << PB(pin));
+   else return 2;
+}
+
 int main(void)
 {
     while(1)
